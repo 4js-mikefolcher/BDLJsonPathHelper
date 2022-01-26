@@ -1,26 +1,3 @@
-# BDLJsonPathHelper
-Genero BDL JSON Path Helper with examples
-
-## Getting Started
-**Prerequisite**\
-Before you get started, you will need to make sure you download the Java prerequisites \
-which includes JsonPath ( https://github.com/json-path/JsonPath ) and all of its dependencies.
-
-You can download the latest version of JsonPath with all the  dependencies here:
-https://jar-download.com/artifacts/com.jayway.jsonpath
-
-## Building the Jar File
-Once you have all the dependencies downloaded and added to your CLASSPATH, you can build the \
-jar file using the jar-build.sh build script.  The script is written in bash, you if you are on \
-Windows you will need to build it manually.
-
-`./jar-build.sh`
-
-**Install the jar file and add it to your class path**
-
-## Using BDLJsonPath in BDL
-**Genero Implementation**
-```genero
 IMPORT util
 IMPORT JAVA com.fourjs.jsonhelper.BDLJsonPath
 IMPORT JAVA java.lang.String
@@ -66,13 +43,46 @@ MAIN
 
 END MAIN
 
-```
+PRIVATE FUNCTION getExampleJson() RETURNS STRING
+   CONSTANT cJsonString = '
+{
+    "store": {
+        "book": [
+            {
+                "category": "reference",
+                "author": "Nigel Rees",
+                "title": "Sayings of the Century",
+                "price": 8.95
+            },
+            {
+                "category": "fiction",
+                "author": "Evelyn Waugh",
+                "title": "Sword of Honour",
+                "price": 12.99
+            },
+            {
+                "category": "fiction",
+                "author": "Herman Melville",
+                "title": "Moby Dick",
+                "isbn": "0-553-21311-3",
+                "price": 8.99
+            },
+            {
+                "category": "fiction",
+                "author": "J. R. R. Tolkien",
+                "title": "The Lord of the Rings",
+                "isbn": "0-395-19395-8",
+                "price": 22.99
+            }
+        ],
+        "bicycle": {
+            "color": "red",
+            "price": 19.95
+        }
+    },
+    "expensive": 10
+}'
 
-**See the example.4gl in the repo for a full example**
+   RETURN cJsonString
 
-### References
-Make sure you review the JsonPath documentation full to understand all the predicates that are supported \
-in the JsonPath. 
-https://github.com/json-path/JsonPath
- 
-
+END FUNCTION

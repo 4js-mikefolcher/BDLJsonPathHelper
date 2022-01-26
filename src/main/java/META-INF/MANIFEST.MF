@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: json-path-helper.jar com/fourjs/jsonhelper/
+Created-By: Michael Folcher
+Main-Class: com.fourjs.jsonhelper.BDLJsonPath
+
