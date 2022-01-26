@@ -11,7 +11,7 @@ https://jar-download.com/artifacts/com.jayway.jsonpath
 
 ## Building the Jar File
 Once you have all the dependencies downloaded and added to your CLASSPATH, you can build the \
-jar file using the jar-build.sh build script.  The script is written in bash, you if you are on \
+jar file using the jar-build.sh build script.  The script is written in bash, if you are on \
 Windows you will need to build it manually.
 
 `./jar-build.sh`
@@ -71,8 +71,9 @@ END MAIN
 **See the example.4gl in the repo for a full example**
 
 ### References
-Make sure you review the JsonPath documentation full to understand all the predicates that are supported \
-in the JsonPath. 
+Make sure you review the JsonPath documentation in order to fully to understand all the \
+predicates that are supported in the JsonPath. 
+
 https://github.com/json-path/JsonPath
  
 
