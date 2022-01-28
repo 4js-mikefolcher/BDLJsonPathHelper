@@ -17,39 +17,60 @@ public class BDLJsonPath {
 
    }
 
-   public String[] getResultList(String search) {
-
+   public Object getResultObject(String search) {
+      
       if (this.ctx == null) {
          return null;
       }
 
-      List<String> matches = this.ctx.read(search);
-      String[] strArray = new String[matches.size()];
-      return matches.toArray(strArray);
-
-   }
-
-   public String getResult(String search) {
-
-      if (this.ctx == null) {
-         return null;
-      }
-
-      String result = this.ctx.read(search);
+      Object result = this.ctx.read(search);
       if (result == null) {
          return "";
       }
       return result;
 
+   }  
+
+   public String[] getResultList(String search) {
+
+      Object result = this.getResultObject(search);
+      if (result == null) {
+         return null;
+      }
+
+      String[] results;
+
+      try {
+         List<String> matches = this.ctx.read(search);
+         results = new String[matches.size()];
+         results = matches.toArray(results);
+      } catch (ClassCastException ex) {
+         //suppress casting exception
+         results = null;
+      }
+
+      return results;
+
+   }
+
+   public String getResult(String search) {
+
+      Object result = this.getResultObject(search);
+      if (result == null) {
+         return null;
+      }
+
+      return String.valueOf(result);
+
    }
 
    public String getResultJson(String search) {
 
-      if (this.ctx == null) {
+      Object obj = this.getResultObject(search);
+      if (obj == null) {
          return null;
       }
 
-      Object obj = this.ctx.read(search);
       String result;
       //System.out.println("obj is class " + obj.getClass());
       if (obj instanceof LinkedHashMap) {
@@ -104,6 +125,18 @@ public class BDLJsonPath {
       resultString = obj.getResultJson("$.store.bicycle");
       if (resultString == null) resultString = "NOT FOUND";
       System.out.println("bicycle JSON is " + resultString);
+
+      //Test 6: Test the fetch of a JSON String, all books less than 10.00
+      System.out.println("------Test #6----------");
+      resultString = obj.getResultJson("$.store.book[?(@.price < 10)]");
+      if (resultString == null) resultString = "NOT FOUND";
+      System.out.println("Books < 10 JSON is " + resultString);
+
+      //Test 7: Test the fetch of a Number, count of all books
+      System.out.println("------Test #7----------");
+      Object result = obj.getResultObject("$.store.book.length()");
+      if (result != null)
+         System.out.println("Number of books is " + String.valueOf(result));
 
    }
 
